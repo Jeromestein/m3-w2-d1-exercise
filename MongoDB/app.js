@@ -8,12 +8,25 @@ client.connect()
   .then(() => {
     // console.log("Database created!");
     // return client.close();
+
+    // var dbo = client.db("nodemongo");
+    // dbo.createCollection("customers").then(res => {
+    //   console.log("Collection created!");
+    //   client.close();
+    // }).catch(err => {
+    //   console.error("Error creating collection", err);
+    // });
+
     var dbo = client.db("nodemongo");
-    dbo.createCollection("customers").then(res => {
-      console.log("Collection created!");
+    var custData = {
+      name: "WU",
+      address: "Irvine, CA"
+    };
+    dbo.collection("customers").insertOne(custData).then(res => {
+      console.log("1 document inserted!");
       client.close();
     }).catch(err => {
-      console.error("Error creating collection", err);
+      console.error("Error inserting document", err);
     });
   })
   .catch(err => {
